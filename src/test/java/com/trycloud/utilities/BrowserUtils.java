@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -15,6 +16,11 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class BrowserUtils {
+
+    public static void hover(WebElement element) {
+        Actions actions = new Actions(Driver.getDriver());
+        actions.moveToElement(element).perform();
+    }
 
     public static void verifyTitle(WebDriver driver, String expectedTitle){
         String actualTitle = driver.getTitle();
@@ -41,6 +47,7 @@ public class BrowserUtils {
             if (each.getAttribute("value").equalsIgnoreCase(attributeValue)){
                 each.click();
             }
+
         }
     }
 
