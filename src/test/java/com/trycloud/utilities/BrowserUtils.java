@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -43,6 +44,45 @@ public class BrowserUtils {
             }
         }
     }
+
+    public static void sleep(int seconds){
+        // 1 second = 1000 millis
+        // millis = seconds*1000
+        try {
+            Thread.sleep(seconds*1000);
+        }catch(InterruptedException e){
+            e.printStackTrace();
+            System.out.println("Exception happened in sleep method!");
+        }
+    }
+
+    public static void hover(WebElement element) {
+        Actions actions = new Actions(Driver.getDriver());
+        actions.moveToElement(element).perform();
+    }
+
+
+    public static void waitFor(int seconds) {
+        try {
+            Thread.sleep(seconds * 1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static WebElement waitForVisibility(WebElement element, int timeToWaitInSec) {
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), timeToWaitInSec);
+        return wait.until(ExpectedConditions.visibilityOf(element));
+    }
+
+
+    public static void clickElement(WebElement element){
+        waitForVisibility(element,10);
+        waitFor(1);
+        element.click();
+    }
+
+
 
 
 }
