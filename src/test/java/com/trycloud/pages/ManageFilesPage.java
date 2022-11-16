@@ -58,7 +58,7 @@ public class ManageFilesPage {
     public void deleteFolder(WebElement folder) {
         Actions actions = new Actions(Driver.getDriver());
         actions.contextClick(folder).perform();
-       waitFor(1);
+        waitFor(1);
         deleteFolderAction.click();
 
     }
@@ -124,6 +124,9 @@ public class ManageFilesPage {
         waitFor(1);
         element.click();
     }
+
+    @FindBy(xpath = "//ul[@id='appmenu']//a[@aria-label='Files']")
+    public WebElement filesModule;
 
 
 }

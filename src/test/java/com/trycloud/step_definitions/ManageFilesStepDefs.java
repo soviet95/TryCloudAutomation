@@ -5,6 +5,7 @@ import com.trycloud.utilities.BrowserUtils;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 
 public class ManageFilesStepDefs {
@@ -13,7 +14,7 @@ public class ManageFilesStepDefs {
     // US-7, TC1 -----------------------------------------------------------------------------------------------
     @When("the user clicks the Files module")
     public void theUserClicksTheFilesModule() {
-        dashboardPage.filesModule.click();
+        filesPage.filesModule.click();
     }
 
     @When("user clicks the add icon on the top")
@@ -42,7 +43,7 @@ public class ManageFilesStepDefs {
 
     @Then("Verify the folder {string} is displayed on the page")
     public void verify_the_folder_is_displayed_on_the_page(String expectedFolderName) {
-        BrowserUtils.waitFor(2);
+       ManageFilesPage.waitFor(2);
         for (WebElement eachFolder : filesPage.fileAndFoldersList) {
             System.out.println(eachFolder.getText());
 
@@ -52,7 +53,7 @@ public class ManageFilesStepDefs {
             if (each.getText().equals(expectedFolderName)) {
                 isFolderExists = true;
                 filesPage.deleteFolder(each);
-                BrowserUtils.waitFor(1);
+                ManageFilesPage.waitFor(1);
 
             }
         }
@@ -64,7 +65,7 @@ public class ManageFilesStepDefs {
     public void userChooseAFolderFromThePage() {
 
         filesPage.firstFolder.click();
-        BrowserUtils.waitFor(2);
+        ManageFilesPage.waitFor(2);
 
     }
 
@@ -73,7 +74,7 @@ public class ManageFilesStepDefs {
     @When("the user uploads a file with the upload file option")
     public void theUserUploadsAFileWithTheUploadFileOption() {
 
-        BrowserUtils.waitFor(2);
+       ManageFilesPage.waitFor(2);
         filesPage.inputButton.sendKeys("C:\\Users\\azizj\\Desktop\\" + expectedFileName + ".txt");
 
 
@@ -85,7 +86,7 @@ public class ManageFilesStepDefs {
 //        filesPage.uploadFileAction.sendKeys("C:\\Users\\azizj\\Desktop\\Test.txt" + Keys.ENTER);
 //        BrowserUtils.waitForInvisibility(filesPage.uploadProgressBar);
 
-        BrowserUtils.waitFor(2);
+        ManageFilesPage.waitFor(2);
     }
 
     @Then("Verify the file is displayed on the page")
