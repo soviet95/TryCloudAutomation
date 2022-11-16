@@ -1,10 +1,18 @@
 package com.trycloud.utilities;
 
+
 import com.trycloud.utilities.Driver;
 import org.junit.Assert;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -37,6 +45,7 @@ public class BrowserUtils {
     }
 
 
+
     //Method info:
     //• Name: verifyTitle()
     //• Return type: void
@@ -67,13 +76,35 @@ public class BrowserUtils {
         Select select = new Select(dropdownElement);
 
         //List of all ACTUAL month <options> as a WebElement
+=======
+    public static void verifyTitle(WebDriver driver, String expectedTitle) {
+        String actualTitle = driver.getTitle();
+        Assert.assertEquals(expectedTitle, actualTitle);
+    }
+
+    public static void verifyTitleContains(WebDriver driver, String expectedTitlePart) {
+        String actualTitle = driver.getTitle();
+        Assert.assertTrue(actualTitle.contains(expectedTitlePart));
+    }
+
+    public static void waitForInvisibility(WebElement element) {
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
+        wait.until(ExpectedConditions.invisibilityOf(element));
+    }
+
+    public static List<String> dropdownOptionsAsString(WebElement dropdown) {
+        Select select = new Select(dropdown);
+
         List<WebElement> actualOptionsAsWebElement = select.getOptions();
 
         //List of all ACTUAL month options as a String
         List<String> actualOptionsAsString = new ArrayList<>();
 
+
         // with using for loop we will convert each WebElement of options to String wit using getText() method
         // with using add() method we will add each String option in List<String> actual options as String
+
+
         for (WebElement each : actualOptionsAsWebElement) {
             actualOptionsAsString.add(each.getText());
         }
@@ -81,6 +112,7 @@ public class BrowserUtils {
         return actualOptionsAsString;
 
     }
+
 
 
     /**
@@ -93,11 +125,17 @@ public class BrowserUtils {
 
         for (WebElement each : radioButtons ) {
             if(each.getAttribute("value").equalsIgnoreCase(attributeValue)){
+
+    public static void clickRadioButton(List<WebElement> radioButtons, String attributeValue) {
+        for (WebElement each : radioButtons) {
+            if (each.getAttribute("value").equalsIgnoreCase(attributeValue)) {
+
                 each.click();
             }
         }
 
     }
+
 
 
     /**
@@ -161,6 +199,7 @@ public class BrowserUtils {
         actions.moveToElement(element).perform();
     }
 
+
     /**
      * return a list of string from a list of elements
      *
@@ -191,6 +230,7 @@ public class BrowserUtils {
         }
         return elemTexts;
     }
+
 
     /**
      * Performs a pause
@@ -531,5 +571,64 @@ public class BrowserUtils {
 
 
 
+    /**
+     * Moves the mouse to given element
+     *
+     * @param element on which to hover
+     */
+    public static void hover(WebElement element) {
+        Actions actions = new Actions(Driver.getDriver());
+        actions.moveToElement(element).perform();
+    }
+
+    public static void clickElement(WebElement element){
+        waitForVisibilityOf(element);
+        element.click();
+    }
+
+    public static void waitForVisibilityOf(WebElement element) {
+
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
+
+        wait.until(ExpectedConditions.visibilityOf(element));
+    }
+
+    public static void sleep(int seconds) {
+        // 1 second = 1000 millis
+        // millis = seconds*1000
+
+        try {
+            Thread.sleep(seconds * 1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            System.out.println("Exception happened in sleep method!");
+        }
+    }
+
+    public static void waitForInvisibilityOf(WebElement element) {
+
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
+
+        wait.until(ExpectedConditions.invisibilityOf(element));
+    }
+
+    public static void waitFor(int seconds) {
+        try {
+            Thread.sleep(seconds * 1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+    public static WebElement waitForVisibility(WebElement element, int timeToWaitInSec) {
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), timeToWaitInSec);
+        return wait.until(ExpectedConditions.visibilityOf(element));
+    }
+    public static void clickElement(WebElement element) {
+        waitForVisibility(element, 10);
+        waitFor(1);
+        element.click();
+    }
 }
 
