@@ -83,7 +83,7 @@ public class ManageFilesStepDefs {
         Assert.assertTrue(isFolderExists);
 
     }
-
+    // US-7, TC2 -----------------------------------------------------------------------------------------------
     @And("user choose a folder from the page")
     public void userChooseAFolderFromThePage() {
 
