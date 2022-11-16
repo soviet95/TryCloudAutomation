@@ -2,6 +2,8 @@ package com.trycloud.step_definitions;
 
 import com.trycloud.pages.ManageFilesPage;
 import com.trycloud.utilities.BrowserUtils;
+import com.trycloud.utilities.ConfigurationReader;
+import com.trycloud.utilities.Driver;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -11,20 +13,25 @@ import org.openqa.selenium.WebElement;
 
 public class ManageFilesStepDefs {
     ManageFilesPage filesPage = new ManageFilesPage();
+
     @Given("User is on the login page")
     public void userIsOnTheLoginPage() {
+        Driver.getDriver().get(ConfigurationReader.getProperty("env"));
     }
 
     @When("User enters username {string} and password {string}")
-    public void userEntersUsernameAndPassword(String arg0, String arg1) {
+    public void userEntersUsernameAndPassword(String username, String password) {
+        filesPage.login(username, password);
     }
 
     @And("User clicks the login button")
     public void userClicksTheLoginButton() {
+        System.out.println("Logged in");
     }
 
     @And("User is at the dashboard page")
     public void userIsAtTheDashboardPage() {
+        filesPage.verifyTitleContains(Driver.getDriver(), "Dashboard");
     }
 
     // US-7, TC1 -----------------------------------------------------------------------------------------------
@@ -59,7 +66,7 @@ public class ManageFilesStepDefs {
 
     @Then("Verify the folder {string} is displayed on the page")
     public void verify_the_folder_is_displayed_on_the_page(String expectedFolderName) {
-       ManageFilesPage.waitFor(2);
+        ManageFilesPage.waitFor(2);
         for (WebElement eachFolder : filesPage.fileAndFoldersList) {
             System.out.println(eachFolder.getText());
 
@@ -90,7 +97,7 @@ public class ManageFilesStepDefs {
     @When("the user uploads a file with the upload file option")
     public void theUserUploadsAFileWithTheUploadFileOption() {
 
-       ManageFilesPage.waitFor(2);
+        ManageFilesPage.waitFor(2);
         filesPage.inputButton.sendKeys("C:\\Users\\azizj\\Desktop\\" + expectedFileName + ".txt");
 
 

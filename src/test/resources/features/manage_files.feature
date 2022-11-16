@@ -17,7 +17,7 @@ Feature: User should be able to add a folder and  upload a file directly
       | username | password    |
       | User20   | Userpass123 |
       | User50   | Userpass123 |
-      | User20   | Userpass123 |
+      | User80   | Userpass123 |
       | User110  | Userpass123 |
 
   @US7-TC2

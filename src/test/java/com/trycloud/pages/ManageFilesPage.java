@@ -90,7 +90,7 @@ public class ManageFilesPage {
         Assert.assertEquals(expected, actual);
     }
 
-    public static void verifyTitleContains(WebDriver driver, String expectedTitlePart) {
+    public  void verifyTitleContains(WebDriver driver, String expectedTitlePart) {
         String actualTitle = driver.getTitle();
         Assert.assertTrue(actualTitle.contains(expectedTitlePart));
     }
