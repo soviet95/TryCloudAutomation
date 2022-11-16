@@ -20,6 +20,21 @@ public class ManageFilesPage {
     public ManageFilesPage() {
         PageFactory.initElements(Driver.getDriver(), this);
     }
+    @FindBy(xpath = "//input[@id='user']")
+    public WebElement usernameInput;
+    @FindBy(xpath = "//input[@id='password']")
+    public WebElement passwordInput;
+    @FindBy(xpath = "//input[@id='submit-form']")
+    public WebElement loginBtn;
+    @FindBy(xpath = "//p[@class='warning wrongPasswordMsg']")
+    public WebElement invalidCredentialsMsg;
+
+    public void login(String username, String password) {
+        usernameInput.sendKeys(username);
+        passwordInput.sendKeys(password);
+        loginBtn.click();
+
+    }
 
     @FindBy(xpath = "//span[@class='icon icon-add']")
     public WebElement addIcon;
