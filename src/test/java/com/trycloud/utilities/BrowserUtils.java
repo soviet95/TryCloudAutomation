@@ -328,6 +328,47 @@ public class BrowserUtils {
         }
     }
 
+
+    public static void sleep(int seconds){
+        // 1 second = 1000 millis
+        // millis = seconds*1000
+        try {
+            Thread.sleep(seconds*1000);
+        }catch(InterruptedException e){
+            e.printStackTrace();
+            System.out.println("Exception happened in sleep method!");
+        }
+    }
+
+    public static void hover(WebElement element) {
+        Actions actions = new Actions(Driver.getDriver());
+        actions.moveToElement(element).perform();
+    }
+
+
+    public static void waitFor(int seconds) {
+        try {
+            Thread.sleep(seconds * 1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static WebElement waitForVisibility(WebElement element, int timeToWaitInSec) {
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), timeToWaitInSec);
+        return wait.until(ExpectedConditions.visibilityOf(element));
+    }
+
+
+    public static void clickElement(WebElement element){
+        waitForVisibility(element,10);
+        waitFor(1);
+        element.click();
+    }
+
+
+
+
     /**
      * Verifies whether the element matching the provided locator is NOT displayed on page
      *
@@ -339,6 +380,7 @@ public class BrowserUtils {
             Assert.assertFalse("Element should not be visible: " + by, Driver.getDriver().findElement(by).isDisplayed());
         } catch (NoSuchElementException e) {
             e.printStackTrace();
+
 
         }
     }
