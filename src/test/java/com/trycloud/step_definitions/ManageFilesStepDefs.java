@@ -3,6 +3,7 @@ package com.trycloud.step_definitions;
 import com.trycloud.pages.ManageFilesPage;
 import com.trycloud.utilities.BrowserUtils;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
@@ -10,6 +11,21 @@ import org.openqa.selenium.WebElement;
 
 public class ManageFilesStepDefs {
     ManageFilesPage filesPage = new ManageFilesPage();
+    @Given("User is on the login page")
+    public void userIsOnTheLoginPage() {
+    }
+
+    @When("User enters username {string} and password {string}")
+    public void userEntersUsernameAndPassword(String arg0, String arg1) {
+    }
+
+    @And("User clicks the login button")
+    public void userClicksTheLoginButton() {
+    }
+
+    @And("User is at the dashboard page")
+    public void userIsAtTheDashboardPage() {
+    }
 
     // US-7, TC1 -----------------------------------------------------------------------------------------------
     @When("the user clicks the Files module")
@@ -94,5 +110,6 @@ public class ManageFilesStepDefs {
         filesPage.verifyFileName(filesPage.fileName, expectedFileName);
 
     }
+
 
 }
